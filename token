@@ -15,20 +15,20 @@ contract Token is ERC20, Ownable {
     }
 
     function mintTokens(address receiverAddress, uint256 amountToMint) external onlyOwner {
-        require(receiverAddress != address(0), "CustomToken: receiver cannot be zero address");
-        require(amountToMint > 0, "CustomToken: amount to mint must be greater than zero");
+        require(receiverAddress != address(0), "Token: receiver cannot be zero address");
+        require(amountToMint > 0, "Token: amount to mint must be greater than zero");
         _mint(receiverAddress, amountToMint);
     }
 
     function burnTokens(uint256 amountToBurn) external {
-        require(amountToBurn > 0, "CustomToken: amount to burn must be greater than zero");
-        require(balanceOf(msg.sender) >= amountToBurn, "CustomToken: insufficient balance to burn");
+        require(amountToBurn > 0, "Token: amount to burn must be greater than zero");
+        require(balanceOf(msg.sender) >= amountToBurn, "Token: insufficient balance to burn");
         _burn(msg.sender, amountToBurn);
     }
 
     function transferTokens(address recipientAddress, uint256 amountToTransfer) external returns (bool) {
-        require(recipientAddress != address(0), "CustomToken: recipient cannot be zero address");
-        require(amountToTransfer > 0, "CustomToken: amount to transfer must be greater than zero");
+        require(recipientAddress != address(0), "Token: recipient cannot be zero address");
+        require(amountToTransfer > 0, "Token: amount to transfer must be greater than zero");
         require(balanceOf(msg.sender) >= amountToTransfer, "CustomToken: insufficient balance to transfer");
         _transfer(msg.sender, recipientAddress, amountToTransfer);
         return true;
